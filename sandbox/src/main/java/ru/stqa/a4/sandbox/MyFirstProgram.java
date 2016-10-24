@@ -1,3 +1,5 @@
+package ru.stqa.a4.sandbox;
+
 /**
  *
  */
