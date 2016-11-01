@@ -38,7 +38,6 @@ public class MyFirstProgram {
       System.out.println("Расстояние между точками :"+"("+pp9.x + ","+pp9.y + ")"+"и"+"("+pp10.x+","+pp10.y+")" + " = " + pp9.distance1(pp10));
 
 
-
     }
 
 
