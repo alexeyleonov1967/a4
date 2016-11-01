@@ -23,9 +23,12 @@ public class Point {
     return s1;
   }
 
+<<<<<<< HEAD
   public double distance1 (Point p2){
     double s = (p2.x - this.x) * (p2.x - this.x) + (p2.y - this.y) * (p2.y - this.y);
     return Math.sqrt(s);
   }
 
+=======
+>>>>>>> 4962e17e25bd4e09f8783cc88771da8a0159fe22
 }

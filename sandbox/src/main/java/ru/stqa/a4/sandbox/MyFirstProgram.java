@@ -30,6 +30,7 @@ public class MyFirstProgram {
         Point pp8 = new Point(-13, -24);
 
         System.out.println("Расстояние между точками :"+"("+pp7.x + ","+pp7.y + ")"+"и"+"("+pp8.x+","+pp8.y+")" + " = " + pp7.distance2(pp7, pp8));
+<<<<<<< HEAD
 
 
       Point pp9 = new Point(-10, -20);
@@ -38,6 +39,8 @@ public class MyFirstProgram {
       System.out.println("Расстояние между точками :"+"("+pp9.x + ","+pp9.y + ")"+"и"+"("+pp10.x+","+pp10.y+")" + " = " + pp9.distance1(pp10));
 
 
+=======
+>>>>>>> 4962e17e25bd4e09f8783cc88771da8a0159fe22
 
     }
 
