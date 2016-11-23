@@ -97,7 +97,7 @@ public class ContactHelper extends BaseHelper {
     type(By.name("homepage"), contactData.getHomepage());
 
 
-    // День рожденья   5 сентября 1900
+    // День рожденья   5 августа 1900
     isSelectedClick("//div[@id='content']/form/select[1]//option[1]");
     //if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[1]")).isSelected()) {
     //  click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
@@ -203,12 +203,17 @@ public class ContactHelper extends BaseHelper {
     //isSelectedClick("//div[@id='content']/form/select[4]//option[4]");
 
 
+    //1950 год
     //wd.findElement(By.name("ayear")).click();
     //wd.findElement(By.name("ayear")).clear();
     //wd.findElement(By.name("ayear")).sendKeys(contactData.getAyear());
     type(By.name("ayear"), contactData.getAyear());
 
-    isSelectedClick("//div[@id='content']/form/select[5]//option[1]");
+    //Group:
+    // Ввод группы пока закомментировал, так как иначе не проходит модификация контакта
+    //isSelectedClick("//div[@id='content']/form/select[5]//option[1]");
+
+
     //wd.findElement(By.name("address2")).click();
     //wd.findElement(By.name("address2")).clear();
     //wd.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
@@ -232,7 +237,7 @@ public class ContactHelper extends BaseHelper {
     //wd.findElement(By.name("notes")).click();
     //wd.findElement(By.name("notes")).clear();
     //wd.findElement(By.name("notes")).sendKeys(contactData.getNotes2());
-    //type(By.name("notes"), contactData.getNotes2());
+    type(By.name("notes"), contactData.getNotes2());
   }
 
   public void initContactCreation() {
@@ -247,6 +252,20 @@ public class ContactHelper extends BaseHelper {
 
   public void selectContact() {
     click(By.name("selected[]"));
+  }
+
+  public void initContactModification() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
+
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  // не используется
+  public void submitContactModification2() {
+    click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
 }
