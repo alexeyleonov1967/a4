@@ -1,7 +1,10 @@
 package ru.stqa.a4.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.a4.addressbook.model.ContactData;
 
 
@@ -10,7 +13,7 @@ import ru.stqa.a4.addressbook.model.ContactData;
  */
 public class ContactHelper extends BaseHelper {
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
@@ -20,6 +23,12 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void fillContactForm(ContactData contactData) {
+
+
+    if (isElementPresent(By.name("new_group"))) {
+      new Select(findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    }
+
     //
     //wd.findElement(By.name("firstname")).click();
     //wd.findElement(By.name("firstname")).clear();

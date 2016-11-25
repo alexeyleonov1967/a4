@@ -1,8 +1,7 @@
 package ru.stqa.a4.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.lang3.ObjectUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -10,9 +9,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  */
 public class BaseHelper {
   //protected FirefoxDriver wd;
-  private FirefoxDriver wd;
+  //private FirefoxDriver wd;
+  private WebDriver wd;
 
-  public BaseHelper(FirefoxDriver wd) {
+  public BaseHelper(WebDriver wd) {
     this.wd = wd;
   }
 
@@ -26,13 +26,24 @@ public class BaseHelper {
   }
 
   protected void type(By locator, String text) {
+    //
     //click(locator);
-    WebElement element = findElement(locator);
     //findElement(locator).clear();
     //findElement(locator).sendKeys(text);
-    element.clear();
-    element.sendKeys(text);
+    //
+    // Оставлять дефолтовые значения для полей на форме +
+    // не менять значение в поле , если новое значение совпадает со старым
+    if (text != null) {
+      WebElement element = findElement(locator);
+
+      String existingText = element.getAttribute("value");
+      if (!text.equals(existingText)) {
+        element.clear();
+        element.sendKeys(text);
+      }
+    }
   }
+
 
   public boolean isAlertPresent() {
     try {
@@ -43,10 +54,20 @@ public class BaseHelper {
     }
   }
 
-
+  //
   protected void isSelectedClick(String path) {
     if (!findElement(By.xpath(path)).isSelected()) {
       click(By.xpath(path));
+    }
+  }
+
+  // Поиск элемента на странице
+  protected boolean isElementPresent(By locator) {
+    try {
+      findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
+      return false;
     }
   }
 }
