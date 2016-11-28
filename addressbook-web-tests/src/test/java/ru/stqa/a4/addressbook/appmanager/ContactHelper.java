@@ -1,9 +1,7 @@
 package ru.stqa.a4.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.a4.addressbook.model.ContactData;
 
@@ -254,18 +252,27 @@ public class ContactHelper extends BaseHelper {
   }
 
 
+  // не используется
+  //public void deleteContact() {
+  //  click(By.xpath("//tr[@class='odd']/td[8]/a/img"));
+  //  click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+  //}
+
   public void deleteContact() {
-    click(By.xpath("//tr[@class='odd']/td[8]/a/img"));
-    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+    //div[@id='content']/form[2]/div[2]/input
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    wd.switchTo().alert().accept();
   }
+
+
 
   public void selectContact() {
     click(By.name("selected[]"));
   }
 
   public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
-
+    // Первая строчка в таблице с индексом 2
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 
   public void submitContactModification() {
@@ -277,4 +284,17 @@ public class ContactHelper extends BaseHelper {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
+  // создание контакта
+  public void createContact(ContactData contactData) {
+    initContactCreation();
+    fillContactForm(contactData);
+    submitContactCreation();
+  }
+
+  public boolean isThereAreContact() {
+    return isElementPresent (By.name("selected[]"));
+  }
 }
+
+
+

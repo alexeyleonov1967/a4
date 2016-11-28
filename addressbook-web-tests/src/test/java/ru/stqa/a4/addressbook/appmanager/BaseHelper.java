@@ -1,8 +1,6 @@
 package ru.stqa.a4.addressbook.appmanager;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by leonov_ai on 18.11.16.
@@ -10,7 +8,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BaseHelper {
   //protected FirefoxDriver wd;
   //private FirefoxDriver wd;
-  private WebDriver wd;
+
+  //private WebDriver wd;
+  protected WebDriver wd;
 
   public BaseHelper(WebDriver wd) {
     this.wd = wd;
