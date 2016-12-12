@@ -67,10 +67,13 @@ public class GroupHelper extends BaseHelper {
     return isElementPresent (By.name("selected[]"));
   }
 
+  // Не используется
   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+
+  // Формирование списка на основании элементов на Web странице
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<GroupData>();
     //

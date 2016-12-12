@@ -2,8 +2,15 @@ package ru.stqa.a4.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.a4.addressbook.model.ContactData;
+import ru.stqa.a4.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static sun.misc.Version.println;
 
 
 /**
@@ -56,7 +63,7 @@ public class ContactHelper extends BaseHelper {
     //wd.findElement(By.name("company")).click();
     //wd.findElement(By.name("company")).clear();
     //wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
-    type(By.name("company"),contactData.getCompany());
+    type(By.name("company"), contactData.getCompany());
 
     //wd.findElement(By.name("address")).click();
     //wd.findElement(By.name("address")).clear();
@@ -265,9 +272,9 @@ public class ContactHelper extends BaseHelper {
   }
 
 
-
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    // click(By.name("selected[]"));
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void initContactModification() {
@@ -292,9 +299,45 @@ public class ContactHelper extends BaseHelper {
   }
 
   public boolean isThereAreContact() {
-    return isElementPresent (By.name("selected[]"));
+    return isElementPresent(By.name("selected[]"));
+  }
+
+
+  // Формирование списка контактов на основании элементов на Web странице контактов
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    //List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    //
+    //List<WebElement> elements = wd.findElements(By.cssSelector("tr.odd"));
+    //List<WebElement> elements2 = wd.findElements(By.cssSelector("tr."));
+    // поиск web элементов для списка по имени name - возвращает  список Web элементов
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+
+    //By.className()
+    //By.name()
+    //By.cssSelector()
+
+
+    for (WebElement element : elements) {
+      //String lastname = element.getText();
+      String fio = element.findElement(By.tagName("input")).getAttribute("title");
+      //System.out.println(fio);
+      //
+      //
+      // поиск элемента в другом элементе - значение value в input
+      //int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+
+      // поиск элемента в другом элементе - id, значение value в input
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      //System.out.println(id);
+
+      ContactData contact = new ContactData(id, fio, "First name", "Middle name", "Last name", "Nickname", "title", "Company", "Address", "123", "456", "789", "123456789", "Alexey.leonov31@gmail.com", "Alexey.leonov31@gmail.com", "Alexey.leonov31@gmail.com", "www.home.page", "1900", "1950", null, "Secondary Address\n", "Home Address", null, "Notes\n", "x11_test1");
+      contacts.add(contact);
+      //
+      //System.out.println(contacts);
+    }
+    return contacts;
+
   }
 }
-
-
 

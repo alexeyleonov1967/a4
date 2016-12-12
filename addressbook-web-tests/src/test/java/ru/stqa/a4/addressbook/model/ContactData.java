@@ -1,6 +1,8 @@
 package ru.stqa.a4.addressbook.model;
 
 public class ContactData {
+  private int id;
+  private String fio;
   private final String fname;
   private final String sname;
   private final String lname;
@@ -25,7 +27,10 @@ public class ContactData {
   private final String notes2;
   private String group;
 
+  // конструктор без id и fio
   public ContactData(String fname, String sname, String lname, String nname, String title, String Company, String Address, String home, String mobile, String work, String fax, String email1, String email2, String email3, String homepage, String byear, String ayear, String address2, String adress22, String phone2, String notes, String notes2, String group) {
+    this.fio = "Select (First name Last name)";
+    this.id = Integer.MAX_VALUE;
     this.fname = fname;
     this.sname = sname;
     this.lname = lname;
@@ -50,6 +55,66 @@ public class ContactData {
     this.notes2 = notes2;
     this.group = group;
   }
+
+  // конструктор с id но без fio
+  public ContactData(int id, String fname, String sname, String lname, String nname, String title, String Company, String Address, String home, String mobile, String work, String fax, String email1, String email2, String email3, String homepage, String byear, String ayear, String address2, String adress22, String phone2, String notes, String notes2, String group) {
+   // this.fio = null;
+    this.fio = "Select (First name Last name)";
+    this.id = id;
+    this.fname = fname;
+    this.sname = sname;
+    this.lname = lname;
+    this.nname = nname;
+    this.title = title;
+    this.company = Company;
+    this.address = Address;
+    this.home = home;
+    this.mobile = mobile;
+    this.work = work;
+    this.fax = fax;
+    this.email1 = email1;
+    this.email2 = email2;
+    this.email3 = email3;
+    this.homepage = homepage;
+    this.byear = byear;
+    this.ayear = ayear;
+    this.address2 = address2;
+    this.adress22 = adress22;
+    this.phone2 = phone2;
+    this.notes = notes;
+    this.notes2 = notes2;
+    this.group = group;
+  }
+
+  //конструктор с fio и id  для контактов
+  public ContactData(int id, String fio, String fname, String sname, String lname, String nname, String title, String Company, String Address, String home, String mobile, String work, String fax, String email1, String email2, String email3, String homepage, String byear, String ayear, String address2, String adress22, String phone2, String notes, String notes2, String group) {
+    this.fio = fio;
+    this.id = id;
+    this.fname = fname;
+    this.sname = sname;
+    this.lname = lname;
+    this.nname = nname;
+    this.title = title;
+    this.company = Company;
+    this.address = Address;
+    this.home = home;
+    this.mobile = mobile;
+    this.work = work;
+    this.fax = fax;
+    this.email1 = email1;
+    this.email2 = email2;
+    this.email3 = email3;
+    this.homepage = homepage;
+    this.byear = byear;
+    this.ayear = ayear;
+    this.address2 = address2;
+    this.adress22 = adress22;
+    this.phone2 = phone2;
+    this.notes = notes;
+    this.notes2 = notes2;
+    this.group = group;
+  }
+
 
   public String getFname() {
     return fname;
@@ -141,5 +206,37 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getFio() {
+    return fio;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    return fio != null ? fio.equals(that.fio) : that.fio == null;
+
+  }
+
+  @Override
+  public int hashCode() {
+    return fio != null ? fio.hashCode() : 0;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", fio='" + fio + '\'' +
+            '}';
   }
 }
