@@ -11,7 +11,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
-    app.getNavigationHelper().gotoHome();
+    app.goTo().gotoHome();
     //
     List<ContactData> before = app.getContactHelper().getContactList();
     //
@@ -37,7 +37,7 @@ public class ContactCreationTests extends TestBase {
     Assert.assertEquals(before, after);
 
 
-    app.logout();
+    //app.logout();
   }
 }
 

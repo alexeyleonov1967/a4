@@ -13,7 +13,7 @@ public class NavigationHelper extends BaseHelper {
     super(wd);
   }
 
-  public void gotoGroupPage() {
+  public void GroupPage() {
     //проверка - нужно ли этот переход делать
     if (isElementPresent(By.tagName("h1"))
       && findElement(By.tagName("h1")).getText().equals("Groups")

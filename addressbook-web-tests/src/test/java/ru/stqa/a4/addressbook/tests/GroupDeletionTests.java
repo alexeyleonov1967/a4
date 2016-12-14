@@ -1,46 +1,52 @@
 package ru.stqa.a4.addressbook.tests;
 
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.a4.addressbook.model.GroupData;
+import ru.stqa.a4.addressbook.model.Groups;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 
 public class GroupDeletionTests extends TestBase {
 
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().GroupPage();
+        if ((app.group().all().size() == 0)) {
+            app.group().create(new GroupData().withName("test_x1"));
+        }
+    }
+
     @Test
     public void testGroupDeletion() {
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()) {
-           app.getGroupHelper().createGroup(new GroupData("test_x1", null, null));
-        }
         // Удаление последнего элемента в списке
-        //int before = app.getGroupHelper().getGroupCount();
-        //app.getGroupHelper().selectGroup(before-1);
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1);
-
-        app.getGroupHelper().deleteSelectedGroups();
-        app.getGroupHelper().returnToGroupPage();
-
-        //int after = app.getGroupHelper().getGroupCount();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        //int before = app.group().getGroupCount();
+        //app.group().selectGroup(before-1);
+        Groups before = app.group().all();
+        GroupData deletedGroup = before.iterator().next();
+        //int index = before.size() - 1;
+        //app.group().delete(index);
+        app.group().delete(deletedGroup);
+        //int after = app.group().getGroupCount();
+        Groups after = app.group().all();
         //
         // after.size() - действительное значение количества элементов списка,
         // before.size() ожидаемое значение количества элементов списка
-        //
-        Assert.assertEquals(after.size(), before.size() - 1);
+        assertEquals(after.size(), before.size() - 1);
         //
         // Удаление последнего элемента в списке
-        before.remove(before.size() - 1);
+        //before.remove(index);
         //
         //for (int i = 0; i < after.size(); i++) {
         //Assert.assertEquals(before.get(i), after.get(i));
         //}
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(deletedGroup)));
+        //Assert.assertEquals(before, after);
         //
-        app.logout();
+        //app.logout();
     }
 
 }

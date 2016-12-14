@@ -1,8 +1,8 @@
 package ru.stqa.a4.addressbook.tests;
 
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import ru.stqa.a4.addressbook.appmanager.ApplicationManager;
 
 /**
@@ -11,14 +11,16 @@ import ru.stqa.a4.addressbook.appmanager.ApplicationManager;
 public class TestBase {
 
   // Internet Explorer (IE)
-  protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+  // FIREFOX
+  // CHROME
+  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
-  @BeforeMethod
+  @BeforeSuite
   public void setUp() throws Exception {
     app.init();
   }
 
-  @AfterMethod
+  @AfterSuite
   public void tearDown() {
     app.stop();
   }
