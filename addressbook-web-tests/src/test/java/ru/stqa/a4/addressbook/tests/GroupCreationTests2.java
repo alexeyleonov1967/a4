@@ -66,7 +66,7 @@ public class GroupCreationTests2 extends TestBase {
         //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
         //Assert.assertEquals(before, after);
         assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-        //app.logout();
+
     }
 
 }

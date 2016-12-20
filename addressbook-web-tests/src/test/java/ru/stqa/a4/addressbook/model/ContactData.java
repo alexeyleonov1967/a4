@@ -1,163 +1,45 @@
 package ru.stqa.a4.addressbook.model;
 
-public class ContactData {
+
+public class ContactData
+{
+  //private int id;
+  //private String fio;
+  //private final String fname;
+  //private final String sname;
+  //private final String lname;
+  //private String group;
+
+  //private int id = Integer.MAX_VALUE ;
   private int id;
-  private String fio;
-  private final String fname;
-  private final String sname;
-  private final String lname;
-  private final String nname;
-  private final String title;
-  private final String company;
-  private final String address;
-  private final String home;
-  private final String mobile;
-  private final String work;
-  private final String fax;
-  private final String email1;
-  private final String email2;
-  private final String email3;
-  private final String homepage;
-  private final String byear;
-  private final String ayear;
-  private final String address2;
-  private final String adress22;
-  private final String phone2;
-  private final String notes;
-  private final String notes2;
-  private String group;
+  private String fname;
+  private String lname;
+  //
+  private String address;
+  //
+  private String email1;
+  private String email2;
+  private String email3;
+  //
+  private String home;
+  private String mobile;
+  private String work;
 
-  // конструктор без id и fio
-  public ContactData(String fname, String sname, String lname, String nname, String title, String Company, String Address, String home, String mobile, String work, String fax, String email1, String email2, String email3, String homepage, String byear, String ayear, String address2, String adress22, String phone2, String notes, String notes2, String group) {
-    this.fio = "Select (First name Last name)";
-    this.id = Integer.MAX_VALUE;
-    this.fname = fname;
-    this.sname = sname;
-    this.lname = lname;
-    this.nname = nname;
-    this.title = title;
-    this.company = Company;
-    this.address = Address;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.fax = fax;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.homepage = homepage;
-    this.byear = byear;
-    this.ayear = ayear;
-    this.address2 = address2;
-    this.adress22 = adress22;
-    this.phone2 = phone2;
-    this.notes = notes;
-    this.notes2 = notes2;
-    this.group = group;
+
+  public int getId() {
+    return id;
   }
-
-  // конструктор с id но без fio
-  public ContactData(int id, String fname, String sname, String lname, String nname, String title, String Company, String Address, String home, String mobile, String work, String fax, String email1, String email2, String email3, String homepage, String byear, String ayear, String address2, String adress22, String phone2, String notes, String notes2, String group) {
-   // this.fio = null;
-    this.fio = "Select (First name Last name)";
-    this.id = id;
-    this.fname = fname;
-    this.sname = sname;
-    this.lname = lname;
-    this.nname = nname;
-    this.title = title;
-    this.company = Company;
-    this.address = Address;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.fax = fax;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.homepage = homepage;
-    this.byear = byear;
-    this.ayear = ayear;
-    this.address2 = address2;
-    this.adress22 = adress22;
-    this.phone2 = phone2;
-    this.notes = notes;
-    this.notes2 = notes2;
-    this.group = group;
-  }
-
-  //конструктор с fio и id  для контактов
-  public ContactData(int id, String fio, String fname, String sname, String lname, String nname, String title, String Company, String Address, String home, String mobile, String work, String fax, String email1, String email2, String email3, String homepage, String byear, String ayear, String address2, String adress22, String phone2, String notes, String notes2, String group) {
-    this.fio = fio;
-    this.id = id;
-    this.fname = fname;
-    this.sname = sname;
-    this.lname = lname;
-    this.nname = nname;
-    this.title = title;
-    this.company = Company;
-    this.address = Address;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.fax = fax;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.homepage = homepage;
-    this.byear = byear;
-    this.ayear = ayear;
-    this.address2 = address2;
-    this.adress22 = adress22;
-    this.phone2 = phone2;
-    this.notes = notes;
-    this.notes2 = notes2;
-    this.group = group;
-  }
-
 
   public String getFname() {
     return fname;
-  }
-
-  public String getSname() {
-    return sname;
   }
 
   public String getLname() {
     return lname;
   }
 
-  public String getNname() {
-    return nname;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getCompany() {
-    return company;
-  }
-
   public String getAddress() {
     return address;
-  }
-
-  public String getHome() {
-    return home;
-  }
-
-  public String getMobile() {
-    return mobile;
-  }
-
-  public String getWork() {
-    return work;
-  }
-
-  public String getFax() {
-    return fax;
   }
 
   public String getEmail1() {
@@ -172,48 +54,81 @@ public class ContactData {
     return email3;
   }
 
-  public String getHomepage() {
-    return homepage;
+  public String getHome() {
+    return home;
   }
 
-  public String getByear() {
-    return byear;
+  public String getMobile() {
+    return mobile;
   }
 
-  public String getAyear() {
-    return ayear;
+  public String getWork() {
+    return work;
   }
 
-  public String getAddress2() {
-    return address2;
+  public ContactData withId(int id){
+    this.id = id;
+    return this;
   }
 
-  public String getAdress22() {
-    return adress22;
+
+  public ContactData withFirstName(String name) {
+    this.fname = name;
+    return this;
   }
 
-  public String getPhone2() {
-    return phone2;
+  public ContactData withLastName(String name) {
+    this.lname = name;
+    return this;
   }
 
-  public String getNotes() {
-    return notes;
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
   }
 
-  public String getNotes2() {
-    return notes2;
+  public ContactData withEMail1(String email) {
+    this.email1 = email;
+    return this;
   }
 
-  public String getGroup() {
-    return group;
+  public ContactData withEMail2(String email) {
+    this.email2 = email;
+    return this;
   }
 
-  public int getId() {
-    return id;
+  public ContactData withEMail3(String email) {
+    this.email3 = email;
+    return this;
   }
 
-  public String getFio() {
-    return fio;
+
+  public ContactData withHomePhones(String phone) {
+    this.home = phone;
+    return this;
+  }
+
+
+  public ContactData withMobilePhones(String phone) {
+    this.mobile = phone;
+    return this;
+  }
+
+
+  public ContactData withWorkPhones(String phone) {
+    this.work = phone;
+    return this;
+  }
+
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", fname='" + fname + '\'' +
+            ", lname='" + lname + '\'' +
+            ", address='" + address + '\'' +
+            '}';
   }
 
   @Override
@@ -223,20 +138,15 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
-    return fio != null ? fio.equals(that.fio) : that.fio == null;
+    if (id != that.id) return false;
+    return fname != null ? fname.equals(that.fname) : that.fname == null;
 
   }
 
   @Override
   public int hashCode() {
-    return fio != null ? fio.hashCode() : 0;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", fio='" + fio + '\'' +
-            '}';
+    int result = id;
+    result = 31 * result + (fname != null ? fname.hashCode() : 0);
+    return result;
   }
 }

@@ -56,6 +56,7 @@ public class ApplicationManager {
       wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
 
+  // Не используется
   public void logout() {
       wd.findElement(By.linkText("Logout")).click();
   }
