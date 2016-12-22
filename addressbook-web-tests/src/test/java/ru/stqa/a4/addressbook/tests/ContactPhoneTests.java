@@ -22,6 +22,13 @@ public class ContactPhoneTests extends TestBase {
     ContactData contact = app.getContactHelper().all2().iterator().next();
     ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
+    // тест имени1
+    assertThat(contact.getFname(), equalTo(contactInfoFromEditForm.getFname()));
+
+    // тест имени2
+    assertThat(contact.getLname(),equalTo(contactInfoFromEditForm.getLname()));
+
+
 //   тест телефонов
     assertThat(contact.getHome(), equalTo(cleaned(contactInfoFromEditForm.getHome())));
     assertThat(contact.getMobile(), equalTo(cleaned(contactInfoFromEditForm.getMobile())));
@@ -37,7 +44,7 @@ public class ContactPhoneTests extends TestBase {
 
   }
 
-  public String cleaned(String phone) {
+  private String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]","");
   }
 

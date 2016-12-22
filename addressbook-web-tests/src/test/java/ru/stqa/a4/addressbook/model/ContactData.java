@@ -1,6 +1,8 @@
 package ru.stqa.a4.addressbook.model;
 
 
+import java.util.Arrays;
+
 public class ContactData
 {
   //private int id;
@@ -24,6 +26,9 @@ public class ContactData
   private String home;
   private String mobile;
   private String work;
+
+  private String contactdetails;
+
 
 
   public int getId() {
@@ -66,8 +71,19 @@ public class ContactData
     return work;
   }
 
+  public String getContactdetail() {
+    return contactdetails;
+  }
+
+
   public ContactData withId(int id){
     this.id = id;
+    return this;
+  }
+
+
+  public ContactData withContactDetail(String details) {
+    this.contactdetails = details;
     return this;
   }
 
@@ -120,14 +136,13 @@ public class ContactData
     return this;
   }
 
-
   @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
             ", fname='" + fname + '\'' +
             ", lname='" + lname + '\'' +
-            ", address='" + address + '\'' +
+            ", contactdetails='" + contactdetails + '\'' +
             '}';
   }
 

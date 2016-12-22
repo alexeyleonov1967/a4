@@ -173,6 +173,89 @@ public class ContactHelper extends BaseHelper {
       return contacts;
     }
 
+
+  // Получние одного контакта Contact из элементов на web странице
+    public ContactData getContact() {
+      //
+      //initContactsDetailsById(contact.getId());
+
+      // Падает поиск id - возможно его нужно брать из URL или передавать сюда через параметр getContact(contact)
+      //int id = Integer.parseInt(findElement(By.tagName("input")).getAttribute("value"));
+
+      // id = yes ??? а должен быть 99
+      //String id = findElement(By.tagName("input")).getAttribute("value");
+
+      //System.out.println(id);
+
+      List<WebElement> rows = wd.findElements(By.id("content"));
+
+      //System.out.println("Начинаем строить список!!!");
+      //System.out.println(rows);
+
+      String resultInfo = "";
+
+      for (WebElement row : rows) {
+        String[] contactDetails = row.getText().split("\n");
+
+        // имя, фамилия, почтовый адрес
+        contactDetails[0] = contactDetails[0].replaceAll("\\s","");
+        contactDetails[1] = contactDetails[1].replaceAll("\\s","");
+        contactDetails[2] = contactDetails[2].replaceAll("\\s","");
+
+        //телефоны 3
+        contactDetails[3] = contactDetails[3].replaceAll("\\s","").replaceAll("[:]","").replaceAll("[H]","");
+        contactDetails[4] = contactDetails[4].replaceAll("\\s","").replaceAll("[:]","").replaceAll("[M]","");
+        contactDetails[5] = contactDetails[5].replaceAll("\\s","").replaceAll("[:]","").replaceAll("[W]","");
+
+        //электронные адреса
+        contactDetails[6] = contactDetails[6].replaceAll("\\s","");
+        contactDetails[7] = contactDetails[7].replaceAll("\\s","");
+        contactDetails[8] = contactDetails[8].replaceAll("\\s","");
+        contactDetails[9] = contactDetails[9].replaceAll("\\s","");
+
+        // имя, фамилия, почтовый адрес
+        //System.out.println(contactDetails[0]);
+        //System.out.println(contactDetails[1]);
+        //System.out.println(contactDetails[2]);
+
+        // телефоны их 3
+        //System.out.println(contactDetails[3]);
+        //System.out.println(contactDetails[4]);
+        //System.out.println(contactDetails[5]);
+        //System.out.println();
+
+        //электронные адреса
+        //System.out.println(contactDetails[6]);
+        //System.out.println(contactDetails[7]);
+        //System.out.println(contactDetails[8]);
+        //System.out.println(contactDetails[9]);
+        //System.out.println();
+
+        //resultInfo = resultInfo + contactDetails[0];
+        //i= i+1;
+
+        //System.out.println(resultInfo);
+        //System.out.println(i);   i=1
+
+        resultInfo = resultInfo + contactDetails[0] + contactDetails[1] + contactDetails[2]
+                + contactDetails[3] + contactDetails[4] + contactDetails[5] ;
+
+        //System.out.println("Результат:");
+        //System.out.println(resultInfo);
+
+      }
+
+      // было ранее
+      //ContactData contact = new ContactData().withId(99).withContactDetail(resultInfo);
+      //
+      //.withFirstName(contactDetail[0]).withLastName(contactDetail[1]);
+      ContactData contact = new ContactData().withContactDetail(resultInfo);
+
+      //System.out.println(contact);
+      return contact;
+    }
+
+
   // Формирование контейнера Contacts из элементов на web странице
   public Contacts all2() {
     Contacts contacts = new Contacts();
@@ -214,7 +297,7 @@ public class ContactHelper extends BaseHelper {
 
        contacts.add(contact);
       //
-      System.out.println(contacts);
+      //System.out.println(contacts);
     }
     return contacts;
   }
@@ -247,13 +330,23 @@ public class ContactHelper extends BaseHelper {
 
     }
 
-    // выбор определенного контакта по id
+    // выбор определенного контакта по id 7 ячейка
     public void initContactModificationById(int id) {
       WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
       WebElement row = checkbox.findElement(By.xpath("./../.."));
       List<WebElement> cells = row.findElements(By.tagName("td"));
       cells.get(7).findElement (By.tagName("a")).click();
     }
+
+    // открыть форму детализации контакта по id 6 ячейка
+  public void initContactsDetailsById(int id) {
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(6).findElement (By.tagName("a")).click();
+  }
+
+
 
   public void delete(ContactData contact) {
     //initContactModificationById(contact.getId());
