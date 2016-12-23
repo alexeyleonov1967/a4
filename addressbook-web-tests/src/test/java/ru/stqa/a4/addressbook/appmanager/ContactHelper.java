@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.a4.addressbook.model.ContactData;
 import ru.stqa.a4.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,10 +37,15 @@ public class ContactHelper extends BaseHelper {
     type(By.name("email"), contactData.getEmail1());
     type(By.name("email2"), contactData.getEmail2());
     type(By.name("email3"), contactData.getEmail3());
+
+    //фото
+    attach(By.name("photo"), contactData.getPhoto());
+
     // не ясно зачем это нужно ???
     //if (isElementPresent(By.name("new_group"))) {
     //  new Select(findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     //}
+
 
   }
 

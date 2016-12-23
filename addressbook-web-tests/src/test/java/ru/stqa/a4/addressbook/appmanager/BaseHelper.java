@@ -2,6 +2,8 @@ package ru.stqa.a4.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 
+import java.io.File;
+
 /**
  * Created by leonov_ai on 18.11.16.
  */
@@ -43,6 +45,16 @@ public class BaseHelper {
       }
     }
   }
+
+
+  protected void attach(By locator, File file) {
+    if (file != null) {
+      WebElement element = findElement(locator);
+      element.sendKeys(file.getAbsolutePath());
+
+      }
+    }
+
 
 
   public boolean isAlertPresent() {

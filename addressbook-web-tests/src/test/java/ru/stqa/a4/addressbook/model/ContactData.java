@@ -1,7 +1,7 @@
 package ru.stqa.a4.addressbook.model;
 
 
-import java.util.Arrays;
+import java.io.File;
 
 public class ContactData
 {
@@ -29,7 +29,18 @@ public class ContactData
 
   private String contactdetails;
 
+  private File photo;
 
+
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -74,6 +85,8 @@ public class ContactData
   public String getContactdetail() {
     return contactdetails;
   }
+
+
 
 
   public ContactData withId(int id){
