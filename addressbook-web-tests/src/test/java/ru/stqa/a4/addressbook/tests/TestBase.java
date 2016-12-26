@@ -13,7 +13,8 @@ public class TestBase {
   // Internet Explorer (IE)
   // FIREFOX
   // CHROME
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+  protected static final ApplicationManager app
+          = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
   @BeforeSuite
   public void setUp() throws Exception {

@@ -1,16 +1,40 @@
 package ru.stqa.a4.addressbook.model;
 
-
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
 @XStreamAlias("group")
+@Entity
+@Table(name = "group_list")
 public class GroupData {
   @XStreamOmitField
-  private int id = Integer.MAX_VALUE ;
+  @Id
+  @Column(name = "group_id")
+  private int id = Integer.MAX_VALUE;;
+
+  @Expose
+  @Column(name = "group_name")
   private String name;
+
+  @Expose
+  @Column(name = "group_header")
+  @Type(type = "text")
   private String header;
+
+  @Expose
+  @Column(name = "group_footer")
+  @Type(type = "text")
   private String footer;
+
 
   // конструктор без id ( id = null, 0, MAX_VALUE; )
   //public GroupData(String name, String header, String footer) {
@@ -27,6 +51,8 @@ public class GroupData {
   //  this.header = header;
   //  this.footer = footer;
   //}
+
+
 
   public String getName() {
     return name;
@@ -96,7 +122,4 @@ public class GroupData {
             ", name='" + name + '\'' +
             '}';
   }
-
 }
-
-

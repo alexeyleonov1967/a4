@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,23 +36,23 @@ public class GroupCreationTests2 extends TestBase {
    //}
 
     // csv
-    //@DataProvider
-    //public Iterator<Object[]> validGroups() throws IOException {
-    //    List<Object[]> list = new ArrayList<Object[]>();
-    //    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
-    //    String line = reader.readLine();
-    //    while (line != null )
-    //    {
-    //        String[] str = line.split(";");
-    //        list.add(new Object[] { new GroupData().withName(str[0]).withHeader(str[1]).withFooter(str[2])});
-    //        line = reader.readLine();
-    //    }
-    //    return list.iterator();
-    //}
+      @DataProvider
+      public Iterator<Object[]> validGroups() throws IOException {
+          List<Object[]> list = new ArrayList<Object[]>();
+          BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+          String line = reader.readLine();
+          while (line != null )
+         {
+             String[] str = line.split(";");
+             list.add(new Object[] { new GroupData().withName(str[0]).withHeader(str[1]).withFooter(str[2])});
+             line = reader.readLine();
+         }
+          return list.iterator();
+      }
 
     //xml
      @DataProvider
-     public Iterator<Object[]> validGroups() throws IOException {
+     public Iterator<Object[]> validGroups2() throws IOException {
          BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
          String xml = "";
          String line = reader.readLine();
@@ -66,9 +67,9 @@ public class GroupCreationTests2 extends TestBase {
      }
 
 
-    @Test(dataProvider = "validGroups")
+    @Test(dataProvider = "validGroups2")
     public void testGroupCreation(GroupData group) {
-       //GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
+        //GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
         app.goTo().GroupPage();
         //int before = app.group().getGroupCount();
         //Set<GroupData> before = app.group().all();
