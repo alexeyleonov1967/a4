@@ -1,8 +1,13 @@
 package ru.stqa.a4.addressbook.model;
 
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+
 import java.io.File;
 
+@XStreamAlias("contact")
 public class ContactData
 {
   //private int id;
@@ -11,24 +16,30 @@ public class ContactData
   //private final String sname;
   //private final String lname;
   //private String group;
-
   //private int id = Integer.MAX_VALUE ;
+  @XStreamOmitField
   private int id;
+
   private String fname;
   private String lname;
   //
   private String address;
   //
+  @XStreamOmitField
   private String email1;
+  @XStreamOmitField
   private String email2;
+  @XStreamOmitField
   private String email3;
-  //
+  @XStreamOmitField
   private String home;
+  @XStreamOmitField
   private String mobile;
+  @XStreamOmitField
   private String work;
-
+  @XStreamOmitField
   private String contactdetails;
-
+  @XStreamOmitField
   private File photo;
 
 
@@ -150,31 +161,34 @@ public class ContactData
   }
 
   @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", fname='" + fname + '\'' +
-            ", lname='" + lname + '\'' +
-            ", contactdetails='" + contactdetails + '\'' +
-            '}';
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
     ContactData that = (ContactData) o;
 
-    if (id != that.id) return false;
-    return fname != null ? fname.equals(that.fname) : that.fname == null;
+    if (fname != null ? !fname.equals(that.fname) : that.fname != null) return false;
+    if (lname != null ? !lname.equals(that.lname) : that.lname != null) return false;
+    return address != null ? address.equals(that.address) : that.address == null;
 
   }
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (fname != null ? fname.hashCode() : 0);
+    int result = fname != null ? fname.hashCode() : 0;
+    result = 31 * result + (lname != null ? lname.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
     return result;
   }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", fname='" + fname + '\'' +
+            ", lname='" + lname + '\'' +
+            ", address='" + address + '\'' +
+            '}';
+  }
+
 }

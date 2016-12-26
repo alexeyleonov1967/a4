@@ -46,7 +46,6 @@ public class ContactHelper extends BaseHelper {
     //  new Select(findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     //}
 
-
   }
 
   public void initContactCreation() {
@@ -297,10 +296,11 @@ public class ContactHelper extends BaseHelper {
       //System.out.println(phones[1]);
       //System.out.println(phones[2]);
 
-      ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
-             .withHomePhones(phones[0]).withMobilePhones(phones[1]).withWorkPhones(phones[2])
-              .withAddress(address).withEMail1(emails[0]).withEMail2(emails[1]).withEMail3(emails[2]);
+      //ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
+      //      .withHomePhones(phones[0]).withMobilePhones(phones[1]).withWorkPhones(phones[2])
+      //        .withAddress(address).withEMail1(emails[0]).withEMail2(emails[1]).withEMail3(emails[2]);
 
+      ContactData contact = new ContactData().withFirstName(firstname).withLastName(lastname).withAddress(address);
        contacts.add(contact);
       //
       //System.out.println(contacts);
