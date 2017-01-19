@@ -73,16 +73,33 @@ public class GroupCreationTests2 extends TestBase {
         app.goTo().GroupPage();
         //int before = app.group().getGroupCount();
         //Set<GroupData> before = app.group().all();
-        Groups before = app.group().all();
+        Groups before2 = app.group().all();
+        Groups before = app.db().groups();
+
+        System.out.println("Start!");
+        System.out.println(before);
+        System.out.println(before2);
+
+
         //GroupData group = new GroupData().withName("test1_x1");
         app.group().create(group);
 
+        System.out.println("create group");
+        System.out.println(group);
+
         //Set<GroupData> after = app.group().all();
-        Groups after = app.group().all();
+        //Groups after = app.group().all();
+        Groups after = app.db().groups();
+
+        //
+        System.out.println("Список из БД");
+        System.out.println(after);
+
         //
         // after - действительное значение элементов, ожидаемое значение элементов
         //Assert.assertEquals(after.size(), before.size() + 1);
         assertThat(after.size(), equalTo(before.size() + 1));
+        assertThat(app.group().getGroupCount(), equalTo(before2.size()+ 1));
 
         // Определение максимума - не используется!
         //int max =0;

@@ -14,7 +14,7 @@ public class TestBase {
   // FIREFOX
   // CHROME
   protected static final ApplicationManager app
-          = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+          = new ApplicationManager(System.getProperty("browser", BrowserType.IE));
 
   @BeforeSuite
   public void setUp() throws Exception {

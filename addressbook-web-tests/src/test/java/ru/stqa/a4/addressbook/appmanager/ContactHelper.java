@@ -1,6 +1,7 @@
 package ru.stqa.a4.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.a4.addressbook.model.ContactData;
@@ -39,7 +40,7 @@ public class ContactHelper extends BaseHelper {
     type(By.name("email3"), contactData.getEmail3());
 
     //фото
-    attach(By.name("photo"), contactData.getPhoto());
+    //attach(By.name("photo"), contactData.getPhoto());
 
     // не ясно зачем это нужно ???
     //if (isElementPresent(By.name("new_group"))) {
@@ -60,8 +61,13 @@ public class ContactHelper extends BaseHelper {
 
   public void deleteContact() {
     //div[@id='content']/form[2]/div[2]/input
+    try {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     wd.switchTo().alert().accept();
+    }
+    catch (NoAlertPresentException e) {
+      System.out.println("no alert");
+    }
   }
 
   //Выбор контакта по индексу
@@ -300,7 +306,7 @@ public class ContactHelper extends BaseHelper {
       //      .withHomePhones(phones[0]).withMobilePhones(phones[1]).withWorkPhones(phones[2])
       //        .withAddress(address).withEMail1(emails[0]).withEMail2(emails[1]).withEMail3(emails[2]);
 
-      ContactData contact = new ContactData().withFirstName(firstname).withLastName(lastname).withAddress(address);
+      ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address);
        contacts.add(contact);
       //
       //System.out.println(contacts);

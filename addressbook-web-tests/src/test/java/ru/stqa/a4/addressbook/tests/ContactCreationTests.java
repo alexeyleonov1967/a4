@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,35 +31,36 @@ public class ContactCreationTests extends TestBase {
   //}
 
   //csv
-  //@DataProvider
-  //public Iterator<Object[]> validContacts() throws IOException {
-  //  List<Object[]> list = new ArrayList<Object[]>();
-  //  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
-  //  String line = reader.readLine();
-  //  while (line != null )
-  //  {
-  //    String[] str = line.split(";");
-  //    list.add(new Object[] { new ContactData().withFirstName(str[0]).withLastName(str[1]).withAddress(str[2])});
-  //    line = reader.readLine();
-  //  }
-  //  return list.iterator();
-  //}
-
-  //xml
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
-    String xml = "";
+    List<Object[]> list = new ArrayList<Object[]>();
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
     String line = reader.readLine();
-    while (line != null) {
-      xml += line;
+    while (line != null )
+    {
+      String[] str = line.split(";");
+      list.add(new Object[] { new ContactData().withFirstName(str[0]).withLastName(str[1]).withAddress(str[2])
+              .withHomePhones(str[3]).withMobilePhones(str[4]).withWorkPhones(str[5])});
       line = reader.readLine();
     }
-    XStream xStream = new XStream();
-    xStream.processAnnotations(ContactData.class);
-    List<ContactData> contacts = (List<ContactData>) xStream.fromXML(xml);
-    return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+    return list.iterator();
   }
+
+  //xml
+  //@DataProvider
+  //public Iterator<Object[]> validContacts() throws IOException {
+  //  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+  //  String xml = "";
+  //  String line = reader.readLine();
+  //  while (line != null) {
+  //    xml += line;
+  //    line = reader.readLine();
+  //  }
+  //  XStream xStream = new XStream();
+  //  xStream.processAnnotations(ContactData.class);
+  //  List<ContactData> contacts = (List<ContactData>) xStream.fromXML(xml);
+  //  return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+  //}
 
 
   @Test (dataProvider = "validContacts")
@@ -66,7 +68,12 @@ public class ContactCreationTests extends TestBase {
     app.goTo().gotoHome();
     //
     //List<ContactData> before = app.getContactHelper().getContactList();
-    Contacts before = app.getContactHelper().all2();
+    //Contacts before = app.getContactHelper().all2();
+    Contacts before = app.db().contacts();
+
+    System.out.println("ДО");
+    System.out.println(before);
+    System.out.println("");
 
     //File photo = new File("src/test/resources/pic1");
 
@@ -78,7 +85,14 @@ public class ContactCreationTests extends TestBase {
 
     //
     //List<ContactData> after = app.getContactHelper().getContactList();
-    Contacts after = app.getContactHelper().all2();
+    //Contacts after = app.getContactHelper().all2();
+    Contacts after = app.db().contacts();
+
+
+    System.out.println("ПОСЛЕ");
+    System.out.println(after);
+    System.out.println("");
+
 
     //before.add(contact);
     //Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());

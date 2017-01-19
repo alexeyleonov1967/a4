@@ -66,7 +66,7 @@ public class BaseHelper {
     }
   }
 
-  //
+  // не используется
   protected void isSelectedClick(String path) {
     if (!findElement(By.xpath(path)).isSelected()) {
       click(By.xpath(path));

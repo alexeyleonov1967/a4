@@ -15,9 +15,15 @@ public class GroupDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().GroupPage();
-        if ((app.group().all().size() == 0)) {
+        //if ((app.group().all().size() == 0)) {
+        //    app.group().create(new GroupData().withName("test_x1"));
+        //}
+        // список читаем из БД
+        if (app.db().groups().size() == 0) {
+            app.goTo().GroupPage();
             app.group().create(new GroupData().withName("test_x1"));
         }
+
     }
 
     @Test
@@ -25,17 +31,26 @@ public class GroupDeletionTests extends TestBase {
         // Удаление последнего элемента в списке
         //int before = app.group().getGroupCount();
         //app.group().selectGroup(before-1);
-        Groups before = app.group().all();
+        //Groups before = app.group().all();
+        Groups before = app.db().groups();
+
+        System.out.println("До");
+        System.out.println(before);
+
         GroupData deletedGroup = before.iterator().next();
         //int index = before.size() - 1;
         //app.group().delete(index);
         app.group().delete(deletedGroup);
         //int after = app.group().getGroupCount();
-        Groups after = app.group().all();
+        //Groups after = app.group().all();
+        Groups after = app.db().groups();
         //
         // after.size() - действительное значение количества элементов списка,
         // before.size() ожидаемое значение количества элементов списка
         assertEquals(after.size(), before.size() - 1);
+
+        System.out.println("После");
+        System.out.println(after);
         //
         // Удаление последнего элемента в списке
         //before.remove(index);
@@ -46,7 +61,6 @@ public class GroupDeletionTests extends TestBase {
         assertThat(after, equalTo(before.without(deletedGroup)));
         //Assert.assertEquals(before, after);
         //
-        //app.logout();
     }
 
 }

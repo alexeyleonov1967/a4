@@ -3,11 +3,16 @@ package ru.stqa.a4.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.hibernate.annotations.Type;
 
 
+import javax.persistence.*;
 import java.io.File;
 
+
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData
 {
   //private int id;
@@ -18,40 +23,76 @@ public class ContactData
   //private String group;
   //private int id = Integer.MAX_VALUE ;
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id;
 
+  @Column(name = "firstname")
   private String fname;
+
+  @Column(name = "lastname")
   private String lname;
   //
+  @Transient
+  private String group;
+
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
   //
+  //
   @XStreamOmitField
+  @Column (name = "email")
+  @Type(type = "text")
   private String email1;
-  @XStreamOmitField
-  private String email2;
-  @XStreamOmitField
-  private String email3;
-  @XStreamOmitField
-  private String home;
-  @XStreamOmitField
-  private String mobile;
-  @XStreamOmitField
-  private String work;
-  @XStreamOmitField
-  private String contactdetails;
-  @XStreamOmitField
-  private File photo;
 
+  @XStreamOmitField
+  @Column (name = "email2")
+  @Type(type = "text")
+  private String email2;
+
+  @XStreamOmitField
+  @Column (name = "email3")
+  @Type(type = "text")
+  private String email3;
+
+  @XStreamOmitField
+  @Column (name = "home")
+  @Type(type = "text")
+  private String home;
+
+  @XStreamOmitField
+  @Column (name = "mobile")
+  @Type(type = "text")
+  private String mobile;
+
+
+  @XStreamOmitField
+  @Column (name = "work")
+  @Type(type = "text")
+  private String work;
+
+
+  @XStreamOmitField
+  @Transient
+  private String contactdetails;
+
+
+  @XStreamOmitField
+  @Column (name = "photo")
+  @Type(type = "text")
+  private String photo;
 
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
+
 
   public int getId() {
     return id;
@@ -154,12 +195,6 @@ public class ContactData
     return this;
   }
 
-
-  public ContactData withWorkPhones(String phone) {
-    this.work = phone;
-    return this;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -167,18 +202,31 @@ public class ContactData
 
     ContactData that = (ContactData) o;
 
+    if (id != that.id) return false;
     if (fname != null ? !fname.equals(that.fname) : that.fname != null) return false;
     if (lname != null ? !lname.equals(that.lname) : that.lname != null) return false;
-    return address != null ? address.equals(that.address) : that.address == null;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (home != null ? !home.equals(that.home) : that.home != null) return false;
+    if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+    return work != null ? work.equals(that.work) : that.work == null;
 
   }
 
   @Override
   public int hashCode() {
-    int result = fname != null ? fname.hashCode() : 0;
+    int result = id;
+    result = 31 * result + (fname != null ? fname.hashCode() : 0);
     result = 31 * result + (lname != null ? lname.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (home != null ? home.hashCode() : 0);
+    result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+    result = 31 * result + (work != null ? work.hashCode() : 0);
     return result;
+  }
+
+  public ContactData withWorkPhones(String phone) {
+    this.work = phone;
+    return this;
   }
 
   @Override
@@ -188,6 +236,9 @@ public class ContactData
             ", fname='" + fname + '\'' +
             ", lname='" + lname + '\'' +
             ", address='" + address + '\'' +
+            ", home='" + home + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", work='" + work + '\'' +
             '}';
   }
 

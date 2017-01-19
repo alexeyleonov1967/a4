@@ -2,6 +2,7 @@ package ru.stqa.a4.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,10 +18,18 @@ public class Contacts extends ForwardingSet<ContactData> {
     this.delegate = new HashSet<ContactData>(contacts.delegate);
   }
 
-  // пустой конструктор Groups
+  // пустой конструктор Contacts
   public Contacts() {
     this.delegate = new HashSet<ContactData>();
   }
+
+
+  // Конструктор объекта типа(класса) Contacts из произвольной коллекции контактов
+  public Contacts(Collection<ContactData> contacts) {
+    // строим объект HashSet множество объектов типа ContactData из коллекции копируя
+    this.delegate = new HashSet<ContactData>(contacts);
+  }
+
 
   @Override
   protected Set<ContactData> delegate() {
