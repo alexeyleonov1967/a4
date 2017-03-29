@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.a4.addressbook.model.ContactData;
 import ru.stqa.a4.addressbook.model.Contacts;
 
@@ -74,6 +75,33 @@ public class ContactHelper extends BaseHelper {
   public void selectContact(int index) {
     // click(By.name("selected[]"));
     wd.findElements(By.name("selected[]")).get(index).click();
+  }
+
+  //Выбор любого первого невыбранного контакта
+  public void selectContact() {
+    // click(By.name("selected[]"));
+    if (!wd.findElement(By.name("selected[]")).isSelected())
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  //Выбор контакта по id проверить как это заработает
+  //public void selectContactById(int id){
+  //  if (!wd.findElement(By.id(String.format('%s', id))).isSelected())
+  //   wd.findElement(By.id(String.format('%s',id))).click();
+  // }
+
+  //Выбор контакта по value
+  public void selectContactById(ContactData contact) {
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", contact.getId())));
+    //wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    checkbox.click();
+  }
+
+
+  //Нажать кнопочку 'Add to'
+  public void addTo(){
+    //wd.findElement(By.name("add")).click();
+    click(By.name("add"));
   }
 
 

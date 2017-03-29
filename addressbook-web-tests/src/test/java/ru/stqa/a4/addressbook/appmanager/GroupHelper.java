@@ -3,6 +3,7 @@ package ru.stqa.a4.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.a4.addressbook.model.GroupData;
 import ru.stqa.a4.addressbook.model.Groups;
 
@@ -56,6 +57,14 @@ public class GroupHelper extends BaseHelper {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
+
+  //Выбор группы в комо-бокс
+  public void selectGroupByName(GroupData group)
+  {
+    if (isElementPresent(By.name("to_group"))) {
+      new Select(findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+    }
+  }
 
 
   public void initGroupModification() {
