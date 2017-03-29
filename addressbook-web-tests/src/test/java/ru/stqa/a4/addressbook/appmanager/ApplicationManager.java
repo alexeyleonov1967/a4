@@ -24,6 +24,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private String browser;
   private DbHelper dbHelper;
+  private DBHelper2 dbHelper2;
 
   public ApplicationManager(String browser)  {
     this.browser = browser;
@@ -36,6 +37,10 @@ public class ApplicationManager {
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target) )));
 
     dbHelper = new DbHelper();
+
+    //для добавления контакта в группу
+    dbHelper2 = new DBHelper2();
+
 
     if (browser == BrowserType.FIREFOX) {
       wd = new FirefoxDriver();
@@ -92,4 +97,9 @@ public class ApplicationManager {
 
   public DbHelper db() {
     return dbHelper; }
+
+
+  public DBHelper2 db2() {
+    return dbHelper2; }
+
 }

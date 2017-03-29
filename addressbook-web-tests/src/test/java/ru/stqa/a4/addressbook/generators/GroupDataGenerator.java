@@ -4,7 +4,6 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.thoughtworks.xstream.XStream;
-import ru.stqa.a4.addressbook.model.ContactData;
 import ru.stqa.a4.addressbook.model.GroupData;
 
 import java.io.File;
